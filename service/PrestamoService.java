@@ -1,30 +1,26 @@
 package credito.service;
 
-import credito.model.Prestamo;
+import credito.modelos.Prestamo;
 import credito.repository.PrestamoRepository;
+import java.util.Optional;
 
 public class PrestamoService {
     private final PrestamoRepository prestamoRepository;
-
+ 
     public PrestamoService(PrestamoRepository prestamoRepository) {
         this.prestamoRepository = prestamoRepository;
     }
 
-    public PrestamoService(PrestamoRepository prestamoRepository) {
-        this.prestamoRepository = prestamoRepository;
+    public Optional<Prestamo> buscarPorId(int id) {
+        return prestamoRepository.buscarPorId(id);
     }
 
-    public Prestamo crearPrestamo(Prestamo prestamo) {
-        return prestamoRepository.save(prestamo);
+     public void actualizarEstado(int id, String nuevoEstado) {
+        prestamoRepository.actualizarEstado(id, nuevoEstado);
     }
 
-    public Prestamo obtenerPrestamoPorId(Long id) {
-        return prestamoRepository.findById(id).orElse(null);
+    public void listarPrestamos() {
+        prestamoRepository.listarPrestamos();
     }
-
-    public void eliminarPrestamo(Long id) {
-        prestamoRepository.deleteById(id);
-    }   
-
 
 }

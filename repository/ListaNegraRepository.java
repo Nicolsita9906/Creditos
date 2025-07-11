@@ -13,11 +13,11 @@ public class ListaNegraRepository {
 
     public boolean estaBloqueado(String cedulaCliente) {
         return registros.stream()
-                        .anyMatch(b -> b.getIdentificacionCliente().equals(cedulaCliente));
+                        .anyMatch(b -> b.getN_identificaionCliente().equals(cedulaCliente));
     }
 
     public void desbloquear(String cedulaCliente) {
-        registros.removeIf(b -> b.getIdentificacionCliente().equals(cedulaCliente));
+        registros.removeIf(b -> b.getN_identificaionCliente().equals(cedulaCliente));
     }
 
     public void listarBloqueados() {

@@ -1,29 +1,29 @@
 package credito.service;
 
-import credito.model.LListaNegra;
-import credito.repository.LListaNegraRepository;
+import credito.modelos.ListaNegra;
+import credito.repository.ListaNegraRepository;
 
 public class LIstaNegraService {
-    private final LListaNegraRepository listaNegraRepository;
+    private final ListaNegraRepository listaNegraRepository;
 
-    public LIstaNegraService(LListaNegraRepository listaNegraRepository) {
+    public LIstaNegraService(ListaNegraRepository listaNegraRepository) {
         this.listaNegraRepository = listaNegraRepository;
     }
 
-    public LIstaNegraService(LListaNegraRepository listaNegraRepository) {
-        this.listaNegraRepository = listaNegraRepository;
+     public void agregar(ListaNegra bloqueo) {
+        listaNegraRepository.agregar(bloqueo);
     }
 
-    public LListaNegra agregarAListaNegra(LListaNegra listaNegra) {
-        return listaNegraRepository.save(listaNegra);
+    public boolean estaBloqueado(String cedulaCliente) {
+        return listaNegraRepository.estaBloqueado(cedulaCliente);
     }
 
-    public LListaNegra obtenerPorId(Long id) {
-        return listaNegraRepository.findById(id).orElse(null);
+    public void desbloquear(String cedulaCliente) {
+        listaNegraRepository.desbloquear(cedulaCliente);
     }
 
-    public void eliminarDeListaNegra(Long id) {
-        listaNegraRepository.deleteById(id);
+    public void listarBloqueados() {
+        listaNegraRepository.listarBloqueados();
     }
 
 }

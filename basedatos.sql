@@ -1,4 +1,4 @@
-CREATE DATABASE creditos
+prestamoCREATE DATABASE creditos
 
 CREATE TABLE empleado(
 id INT AUTO_INCREMENT PRIMARY KEY,
@@ -16,7 +16,7 @@ CREATE TABLE prestamo (
   monto_interes FLOAT NOT NULL,
   fecha_prestamo DATE NOT NULL,
   fecha_pago DATE NOT NULL,
-  estado VARCHAR(50) NOT NULL,
+  estado VARCHAR (50) NOT NULL,
   FOREIGN KEY (identificacion_cliente) REFERENCES cliente(cedula)
 );
 
