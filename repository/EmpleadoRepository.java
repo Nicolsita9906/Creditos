@@ -9,9 +9,9 @@ public class EmpleadoRepository {
     private ArrayList<Cliente> clientes;
 
     //crear un cliente desde el sistema
-    public void crearEmpleado(Cliente cliente) {
+    public void crearCliente(Cliente cliente) {
         if(cliente.getEdad() < 18) {
-            System.out.println("El cliente debe ser mayor de edad para crear un empleado.");
+            System.out.println("El cliente debe ser mayor de edad para crear un cliente.");
             return;
         }else{
             clientes.add(cliente);

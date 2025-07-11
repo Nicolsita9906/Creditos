@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-/** Operaciones básicas sobre clientes y sus préstamos. */
+ //Operaciones básicas sobre clientes y sus préstamos. 
 public class ClienteRepository {
 
     private final List<Cliente> clientes = new ArrayList<>();
