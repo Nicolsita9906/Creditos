@@ -1,32 +1,47 @@
 package credito.repository;
-import credito.modelos.Cliente;
 
+import credito.modelos.Cliente;
+import credito.modelos.Prestamo;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+/** Operaciones básicas sobre clientes y sus préstamos. */
 public class ClienteRepository {
 
-    //solicitar un prestamo
-    public void solicitarPrestamo(Cliente cliente) {
-        if(cliente.getEdad() < 18) {
-            System.out.println("El cliente debe ser mayor de edad para solicitar un prestamo.");
+    private final List<Cliente> clientes = new ArrayList<>();
+    private final List<Prestamo> prestamos = new ArrayList<>();
+
+    public void registrarCliente(Cliente cliente) {
+        clientes.add(cliente);
+    }
+
+    public void solicitarPrestamo(Cliente cliente, Prestamo prestamo) {
+        if (cliente.getEdad() < 18) {
+            System.out.println("El cliente debe ser mayor de edad.");
             return;
-        } else {
-            //logica para solicitar prestamo
-            System.out.println("El cliente " + cliente.getNombre() + " ha solicitado un prestamo correctamente.");
         }
+        if (!cliente.isTieneHistorialCrediticioPositivo()) {
+            System.out.println("Historial negativo: préstamo rechazado.");
+            return;
+        }
+        prestamos.add(prestamo);
+        System.out.println("Préstamo solicitado correctamente.");
     }
 
-    //cancelar un prestamo
-    public void cancelarPrestamo(Cliente cliente) {
-       // if(Prestamo prestamo = cliente.getPrestamo() == null) {
-            //logica para cancelar prestamo
-            System.out.println("El cliente " + cliente.getNombre() + " ha cancelado un prestamo correctamente.");
-       // }
+    public void cancelarPrestamo(int prestamoId) {
+        prestamos.removeIf(p -> p.getId() == prestamoId);
     }
 
-    //consultar estado de un prestamo
-    public void consultarEstadoPrestamo(Cliente cliente) {
-        //logica para consultar estado de prestamo
-        System.out.println("El cliente " + cliente.getNombre() + " ha consultado el estado de su prestamo.");
+    public void consultarEstadoPrestamo(int prestamoId) {
+        Optional<Prestamo> p = prestamos.stream()
+                                        .filter(pr -> pr.getId() == prestamoId)
+                                        .findFirst();
+        System.out.println(p.map(Prestamo::getEstadoPrestamo)
+                            .orElse("No existe préstamo con id " + prestamoId));
     }
 
-
+    public void listarClientes() {
+        clientes.forEach(System.out::println);
+    }
 }
